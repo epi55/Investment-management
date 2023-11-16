@@ -24,7 +24,7 @@ def effectiveAnnualRate(ar, cp, years, *pr):
 # Future value factor (or future value interest factor) = (1 + i/y) ** n
 def futureValue(pv, iy, n):
     fv = pv * (1 + iy) ** n
-    print("Future value: {}.".format(fv))
+    print("Future value: {}.".format(round(float(fv), 2)))
     return(round(float(fv), 2))
 
 # PRESENT VALUE (PV) / DISCOUNT RATE / OPPORTUNTIY COST / REQUIRED RATE OF RETURN / COST OF CAPITAL
@@ -61,6 +61,13 @@ def presentValuePerpetuity(pmt, iy):
     print("Present value perpetuity: {}.".format(pvp))
     return(round(float(pvp), 2))
 
+def futureValueUnevenCashFlow(iy, *cashFlows):
+    totalFV = 0
+    for i, cashFlow in enumerate(cashFlows):
+        totalFV += futureValue(cashFlow, iy, len(cashFlows) - (i + 1))
+
+    print("Future value of uneven cash flows: {}.".format(totalFV))
+    return round(totalFV, 2)
 
 # RUN
 # (1) annual rate, (2) compounding periods, (3) years, (4) periodic rate
@@ -80,3 +87,6 @@ def presentValuePerpetuity(pmt, iy):
 
 #presentValuePerpetuity(pmt, iy)
 #presentValuePerpetuity(4.50, 0.08)
+
+#futureValueUnevenCashFlow(iy, *cashflows)
+futureValueUnevenCashFlow(.10, 300, 600, 200)
